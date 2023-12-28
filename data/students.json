@@ -1,0 +1,63 @@
+{
+    "students" : [
+        {
+            "ID": 123,
+            "Name": "Resul",
+            "LastName": "Bozburun",
+            "GPA":3.26,
+            "Lectures":[
+                "3507 Web Development and Programming", 
+                "4501 Software Design Patterns"
+            ],
+            "Scores":{
+                "3507 Web Development and Programming":78,
+                "4501 Software Design Patterns":60
+            }
+        },
+        {
+            "ID": 456,
+            "Name": "Maria",
+            "LastName": "Gonzalez",
+            "GPA": 3.75,
+            "Lectures": [
+                "3507 Web Development and Programming",
+                "3103 Database Systems",
+                "4502 Advanced Networking"
+            ],
+            "Scores": {
+                "3507 Web Development and Programming": 85,
+                "3103 Database Systems": 90
+            }
+        },
+        {
+            "ID": 789,
+            "Name": "Akash",
+            "LastName": "Singh",
+            "GPA": 3.40,
+            "Lectures": [
+                "3502 IOT Design",
+                "4501 Software Design Patterns",
+                "4603 Machine Learning"
+            ],
+            "Scores": {
+                "3502 IOT Design": 82,
+                "4603 Machine Learning": 76
+            }
+        },
+        {
+            "ID": 1011,
+            "Name": "Emily",
+            "LastName": "Chen",
+            "GPA": 3.65,
+            "Lectures": [
+                "4501 Software Design Patterns",
+                "4102 Artificial Intelligence",
+                "4503 Cloud Computing"
+            ],
+            "Scores": {
+                "4501 Software Design Patterns": 88,
+                "4102 Artificial Intelligence": 91
+            }
+        }
+    ]
+}

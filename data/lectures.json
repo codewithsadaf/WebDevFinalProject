@@ -1,0 +1,23 @@
+
+[
+    {
+            "name":"4005 Data Science",
+            "midterm":40,
+            "final":60
+    },
+    {
+        "name":"3508 Computer Networks",
+        "midterm":30,
+        "final":70
+    },
+    {
+        "name":"4102 Artificial Intelligence",
+        "midterm":40,
+        "final":60
+    },
+    {
+        "name":"3103 Database Systems",
+        "midterm":30,
+        "final":70
+    }
+]
