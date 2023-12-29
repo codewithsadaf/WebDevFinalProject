@@ -95,7 +95,23 @@ h1 {
     box-sizing: border-box; /* Ensures padding doesn't affect overall width */
 }
 
-#add-course-btn {
+#btn-yellow {
+    display: block;
+    width: 100%;
+    padding: 10px 20px;
+    margin-top: 20px;
+    background-color: #e8cd00;
+    color: black;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+#btn-yellow:hover {
+    background-color: #d2ba04;
+}
+
+#btn-green {
     display: block;
     width: 100%;
     padding: 10px 20px;
@@ -108,7 +124,7 @@ h1 {
     font-size: 16px;
 }
 
-#add-course-btn:hover {
+#btn-green:hover {
     background-color: #218838;
 }
 
@@ -138,6 +154,17 @@ h1 {
 }
 
 #dropdown-img {
-    width: 2%;
+    width: 18px;
     margin-right: 5px; 
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th, td {
+    border: 1px solid black;
+    padding: 8px;
+    text-align: left;
 }
