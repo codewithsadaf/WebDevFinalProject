@@ -1,84 +1,106 @@
 
 [
     {
-            "name":"4005 Data Science",
+        "id":1,    
+        "name":"4005 Data Science",
             "midterm":40,
             "final":60,
             "students":[
                 {
                     "id": 180709001,
+                    "name":"john",
+                    "surname":"doe",
                     "midterm":55,
                     "final":65,
-                    "letter":"AA"
+                    "letter":"A"
                 },
                 {
                     "id": 180709002,
+                    "name":"melissa",
+                    "surname":"clark",
                     "midterm":50,
                     "final":62,
-                    "letter":"AA"
+                    "letter":"A"
                 }
             ]
     },
     {
+        "id":2, 
         "name":"3508 Computer Networks",
         "midterm":30,
         "final":70,
         "students":[
             {
                 "id": 180709003,
+                "name":"ali",
+                "surname":"kurt",
                 "midterm":75,
                 "final":65,
-                "letter":"AA"
+                "letter":"A"
             },
             {
                 "id": 180709004,
+                "name":"sefa",
+                "surname":"turp",
                 "midterm":65,
                 "final":75,
-                "letter":"AA"
+                "letter":"A"
             }
         ]
     },
     {
+        "id":3, 
         "name":"4102 Artificial Intelligence",
         "midterm":40,
         "final":60,
         "students":[
             {
                 "id": 180709005,
+                "name":"mike",
+                "surname":"niche",
                 "midterm":30,
                 "final":80,
-                "letter":"AA"
+                "letter":"A"
             },
             {
                 "id": 180709006,
+                "name":"teressa",
+                "surname":"kane",
                 "midterm":90,
                 "final":70,
-                "letter":"AA"
+                "letter":"A"
             },
             {
                 "id": 180709008,
+                "name":"samuel",
+                "surname":"anthon",
                 "midterm":20,
                 "final":25,
-                "letter":"AA"
+                "letter":"A"
             }
         ]
     },
     {
+        "id":4, 
         "name":"3103 Database Systems",
         "midterm":30,
         "final":70,
         "students":[
             {
                 "id": 180709007,
+                "name":"bob",
+                "surname":"smith",
                 "midterm":90,
                 "final":55,
-                "letter":"AA"
+                "letter":"A"
             },
             {
                 "id": 180709008,
+                "name":"ayse",
+                "surname":"tezel",
                 "midterm":51,
                 "final":36,
-                "letter":"AA"
+                "letter":"A"
             }
         ]
     }

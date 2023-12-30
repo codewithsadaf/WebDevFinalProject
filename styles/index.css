@@ -111,7 +111,7 @@ h1 {
     background-color: #d2ba04;
 }
 
-#btn-green {
+.btn-green {
     display: block;
     width: 100%;
     padding: 10px 20px;
@@ -124,7 +124,7 @@ h1 {
     font-size: 16px;
 }
 
-#btn-green:hover {
+.btn-green:hover {
     background-color: #218838;
 }
 
@@ -167,4 +167,36 @@ th, td {
     border: 1px solid black;
     padding: 8px;
     text-align: left;
+}
+
+.edit-btn{
+    display: inline;
+    width: fit-content;
+    padding: 5px 15px 5px 15px;
+    background-color: #757D79;
+    color: white;
+    font-weight: 600;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px; 
+}
+.edit-btn:hover{
+    background-color: rgb(103, 110, 106);
+}
+
+.remove-btn{
+    display: inline;
+    width: fit-content;
+    padding: 5px;
+    background-color: #AE080B;
+    color: white;
+    font-weight: 600;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px; 
+}
+.remove-btn:hover{
+    background-color: #8d090b;
 }
