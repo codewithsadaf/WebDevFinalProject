@@ -6,6 +6,7 @@ A Student Management Application written in JavaScript without any 3rd part libr
 --------------
 - Automatically letter & grade calculation
 - Automatically GPA calculation
+- Modular view for Edit  & Remove operations
 
 ## Images
 Homepage:
