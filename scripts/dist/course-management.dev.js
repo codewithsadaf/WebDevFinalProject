@@ -420,8 +420,7 @@ function removeStudentFromCourse(student, course) {
     if (Number(course.students[i].id) == Number(student.id)) {
       course.students.splice(i, 1); //Remove the target student from array
 
-      console.log("Remove operation finished");
-      console.log(course.students); // Update localStorage
+      console.log("Remove operation finished"); // Update localStorage
 
       var oldCourses = JSON.parse(localStorage.getItem('lectures'));
 
@@ -516,8 +515,7 @@ function onCourseItemClicked(course) {
 
 function populateCourseList(courses) {
   var courseList = document.getElementById('course-list');
-  courseList.innerHTML = ''; //console.log(courses);
-
+  courseList.innerHTML = '';
   courses.forEach(function (course) {
     var courseItem = document.createElement('div');
     courseItem.classList.add('course-item');

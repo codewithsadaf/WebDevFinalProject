@@ -9,16 +9,16 @@
             "students":[
                 {
                     "id": 180709001,
-                    "name":"john",
-                    "surname":"doe",
+                    "name":"John",
+                    "surname":"Doe",
                     "midterm":55,
                     "final":65,
                     "letter":"F"
                 },
                 {
                     "id": 180709002,
-                    "name":"melissa",
-                    "surname":"clark",
+                    "name":"Melissa",
+                    "surname":"Clark",
                     "midterm":50,
                     "final":62,
                     "letter":"A"
@@ -34,24 +34,24 @@
         "students":[
             {
                 "id": 180709003,
-                "name":"ali",
-                "surname":"kurt",
+                "name":"Ali",
+                "surname":"Kurt",
                 "midterm":75,
                 "final":65,
                 "letter":"B"
             },
             {
                 "id": 180709004,
-                "name":"sefa",
-                "surname":"turp",
+                "name":"Sefa",
+                "surname":"Turp",
                 "midterm":65,
                 "final":75,
                 "letter":"F"
             },
             {
                 "id": 180709007,
-                "name":"bob",
-                "surname":"smith",
+                "name":"Bob",
+                "surname":"Smith",
                 "midterm":90,
                 "final":55,
                 "letter":"C"
@@ -67,24 +67,24 @@
         "students":[
             {
                 "id": 180709005,
-                "name":"mike",
-                "surname":"niche",
+                "name":"Mike",
+                "surname":"Niche",
                 "midterm":30,
                 "final":80,
                 "letter":"D"
             },
             {
                 "id": 180709006,
-                "name":"teressa",
-                "surname":"kane",
+                "name":"Teressa",
+                "surname":"Kane",
                 "midterm":90,
                 "final":70,
                 "letter":"A"
             },
             {
                 "id": 180709008,
-                "name":"samuel",
-                "surname":"anthon",
+                "name":"Samuel",
+                "surname":"Anthon",
                 "midterm":20,
                 "final":25,
                 "letter":"A"
@@ -100,16 +100,16 @@
         "students":[
             {
                 "id": 180709007,
-                "name":"bob",
-                "surname":"smith",
+                "name":"Bob",
+                "surname":"Smith",
                 "midterm":90,
                 "final":55,
                 "letter":"F"
             },
             {
                 "id": 180709008,
-                "name":"ayse",
-                "surname":"tezel",
+                "name":"Ayse",
+                "surname":"Tezel",
                 "midterm":51,
                 "final":36,
                 "letter":"A"
@@ -125,16 +125,16 @@
         "students":[
             {
                 "id": 180709007,
-                "name":"bob",
-                "surname":"smith",
+                "name":"Bob",
+                "surname":"Smith",
                 "midterm":90,
                 "final":55,
                 "letter":"C"
             },
             {
                 "id": 180709008,
-                "name":"ayse",
-                "surname":"tezel",
+                "name":"Ayse",
+                "surname":"Tezel",
                 "midterm":51,
                 "final":36,
                 "letter":"D"

@@ -75,12 +75,9 @@ function displayResultsInTable(results) {
         row.insertCell().textContent = `${student.name} ${student.surname}`;
         row.insertCell().textContent = courseName;
         row.insertCell().textContent = student.letter;
-        row.insertCell().textContent = calculateGPA(student);
+        row.insertCell().textContent = Math.floor(calculateGPA(student));
         counter++;
     });
-
-    console.log(results[0].student);
-    calculateGPA(results[0].student);
 
     // Append the table to resultsDiv
     resultsDiv.appendChild(table);
@@ -94,8 +91,6 @@ function generateSearchModel(idOrNameInput, courseIdfilter, gradeStatusFilter){
     // Set main search input
     if (idOrNameInput){
         searchModel.input = idOrNameInput;
-        console.log('burada');
-        console.log(idOrNameInput);
     } else {
         searchModel.input = '';
     }
@@ -121,7 +116,6 @@ function generateSearchModel(idOrNameInput, courseIdfilter, gradeStatusFilter){
 }
 
 function searchLogic(searchModel){
-    console.log('search');
     let courses = JSON.parse(localStorage.getItem('lectures'));
     results = []
     courses.forEach(course => {
