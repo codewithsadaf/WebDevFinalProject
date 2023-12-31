@@ -3,8 +3,9 @@
     {
         "id":1,    
         "name":"4005 Data Science",
-            "midterm":40,
-            "final":60,
+        "midterm":40,
+        "final":60,
+        "credits":6,
             "students":[
                 {
                     "id": 180709001,
@@ -12,7 +13,7 @@
                     "surname":"doe",
                     "midterm":55,
                     "final":65,
-                    "letter":"A"
+                    "letter":"F"
                 },
                 {
                     "id": 180709002,
@@ -28,6 +29,7 @@
         "id":2, 
         "name":"3508 Computer Networks",
         "midterm":30,
+        "credits":4,
         "final":70,
         "students":[
             {
@@ -36,7 +38,7 @@
                 "surname":"kurt",
                 "midterm":75,
                 "final":65,
-                "letter":"A"
+                "letter":"B"
             },
             {
                 "id": 180709004,
@@ -44,7 +46,15 @@
                 "surname":"turp",
                 "midterm":65,
                 "final":75,
-                "letter":"A"
+                "letter":"F"
+            },
+            {
+                "id": 180709007,
+                "name":"bob",
+                "surname":"smith",
+                "midterm":90,
+                "final":55,
+                "letter":"C"
             }
         ]
     },
@@ -53,6 +63,7 @@
         "name":"4102 Artificial Intelligence",
         "midterm":40,
         "final":60,
+        "credits": 6,
         "students":[
             {
                 "id": 180709005,
@@ -60,7 +71,7 @@
                 "surname":"niche",
                 "midterm":30,
                 "final":80,
-                "letter":"A"
+                "letter":"D"
             },
             {
                 "id": 180709006,
@@ -85,6 +96,7 @@
         "name":"3103 Database Systems",
         "midterm":30,
         "final":70,
+        "credits": 6,
         "students":[
             {
                 "id": 180709007,
@@ -92,7 +104,7 @@
                 "surname":"smith",
                 "midterm":90,
                 "final":55,
-                "letter":"A"
+                "letter":"F"
             },
             {
                 "id": 180709008,
@@ -101,6 +113,31 @@
                 "midterm":51,
                 "final":36,
                 "letter":"A"
+            }
+        ]
+    },
+    {
+        "id":5, 
+        "name":"2008 Calculus",
+        "midterm":30,
+        "final":70,
+        "credits": 6,
+        "students":[
+            {
+                "id": 180709007,
+                "name":"bob",
+                "surname":"smith",
+                "midterm":90,
+                "final":55,
+                "letter":"C"
+            },
+            {
+                "id": 180709008,
+                "name":"ayse",
+                "surname":"tezel",
+                "midterm":51,
+                "final":36,
+                "letter":"D"
             }
         ]
     }
