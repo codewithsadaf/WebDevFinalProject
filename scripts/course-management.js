@@ -8,7 +8,7 @@ function loadCourseManagement(){
             <div class='dropdown-content' id='course-list'></div>
         </div>
         <div class='card' id='add-course'>Add Course</div>
-        <div class='card' id='delete-course'>Delete Course</div>
+        <div class='card' id='delete-courses'>Delete Course</div>
     `;
 
     // Set event listener for Add Course element
@@ -26,6 +26,20 @@ function loadCourseManagement(){
             document.getElementById('dropdown-img').src = './img/down-arrow.png';
             this.classList.add('dropdown-active');
         }
+    });
+
+    // Set event listener for Delete Course element
+    document.getElementById('delete-courses').addEventListener('click',function (){
+        // Display all of the courses 
+        let courses = JSON.parse(localStorage.getItem('lectures'));
+
+        const courseListDiv = document.createElement('div');
+        courseListDiv.id = 'course-list';
+        mainContent.innerHTML = '';
+        mainContent.appendChild(courseListDiv);
+
+        displayCoursesTable(courses, courseListDiv);
+        courseListDiv.style.display = 'block';
     });
 }
 
@@ -53,21 +67,23 @@ function addCourse(){
     // Set an Event Listener for the Add Course form
     const courseForm = document.getElementById('course-form');
 
-    // Load existing courses or initialize an empty list
-    let courses = JSON.parse(localStorage.getItem('lectures')) || [];
+    
 
     courseForm.addEventListener('submit', function(event) {
         event.preventDefault();
 
         // Add new course to the JSON file
         const newCourse = {
+            id: getNextCourseId(),
             name: document.getElementById('course-name').value,
             midterm: document.getElementById('final-rate').value,
             final: document.getElementById('midterm-rate').value,
             students: []
         };
-
+        // Load existing courses or initialize an empty list
+        let courses = JSON.parse(localStorage.getItem('lectures')) || [];
         courses.push(newCourse);
+
         localStorage.setItem('lectures', JSON.stringify(courses));
         let courseListDiv = document.getElementById('course-list');
         courseListDiv.style.display = 'none';
@@ -76,16 +92,18 @@ function addCourse(){
     });
 }
 
+// Returns the next ID value for a new course item
+function getNextCourseId(){
+    let courses = JSON.parse(localStorage.getItem('lectures'))
+    console.log(courses);
+    let lastIndex = courses.length - 1
+
+    return lastIndex + 2;
+}
+
 // Displays the course list
 function displayCoursesTable(courses, courseListDiv) {
-    // const courseListElement = document.getElementById('course-list');
-    // courseListElement.innerHTML = '<h2>Course List</h2>';
-
-    // courses.forEach(course => {
-    //     courseListElement.innerHTML += `<div>${course.name} - Midterm Rate: ${course.midterm}%, Final Rate: ${course.final}%</div>`;
-    // });
-
-    // Create table for course list
+    courseListDiv.innerHTML = '';
     let coursesHtml = '<h2>Courses:</h2><table>';
     coursesHtml += '<tr><th>Name</th><th>Midterm Rate (%)</th><th>Final Rate (%)</th><th>Actions</th></tr>';
     courses.forEach(course => {
@@ -108,19 +126,174 @@ function displayCoursesTable(courses, courseListDiv) {
         courseListDiv.style.display = 'none';
     }
 
+    // Create modal div for edit/remove buttons
+    if (!document.getElementsByClassName('modal')[0]){
+        modal = document.createElement('div');
+        modal.className = 'modal';
+        mainContent.appendChild(modal);
+    } else {
+        modal = document.getElementsByClassName('modal')[0];
+    }
+
     // Set event click listeners for edit/remove buttons
     courseListDiv.addEventListener('click', function(event) {
+        var courseId = event.target.getAttribute('data-id');
+        var course = getCourseById(courses, courseId);
         if (event.target.className === 'edit-btn') {
-            const courseId = event.target.getAttribute('data-id');
-            console.log('Edit student with ID:', courseId);
-            editCourseModal(course, courseId);
+            console.log('Edit course with ID:', courseId);
+            showCourseModal(course, modal);
+            
 
         } else if (event.target.className === 'remove-btn') {
-            const courseId = event.target.getAttribute('data-id');
-            console.log('Remove student with ID:', courseId);
-            // Add remove functionality here
+            console.log('Remove course with ID:', courseId);
+            showRemoveCourseModal(course, modal);
         }
     });
+}
+
+// Displays the modal for remove course operation
+function showRemoveCourseModal(course, modal){
+    modal.innerHTML = '';
+    modal.innerHTML = `
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <h4>Are you sure you want to remove  the course?</h4>
+        <div class="input-field">
+            <label for="removeCoursename">Course Name:</label>
+            <input type="text" id="removeCourseName">
+        </div>
+        <button id="removeCourse" class="btn">Remove</button>
+    </div>
+    `
+    // Capture modal elements
+    const courseNameInput = document.getElementById('removeCourseName');
+    const removeButton = document.getElementById('removeCourse');
+
+    // Populate modal fields with student data
+    courseNameInput.value = course.name;
+
+    // Show the modal
+    modal.style.display = 'block';
+
+    // Add event listener to remove button
+    removeButton.addEventListener('click', function (){
+        console.log('Removing the course from the system. Course ID:', course.id);
+        removeCourse(course.id);
+        
+        // Update the course list table
+        let updatedCourses = JSON.parse(localStorage.getItem('lectures'));
+        let courseListDiv = document.getElementById('course-list');
+        courseListDiv.style.display = 'none';
+        displayCoursesTable(updatedCourses, courseListDiv);
+
+        // Hide the modal after saving
+        modal.style.display = 'none';
+    });
+
+    // Added another event listener for close button
+    const closeButton = document.querySelector('.close');
+    closeButton.onclick = function() {
+        modal.style.display = 'none';
+    };
+}
+
+// Removes the course for the given id from localstorage
+function removeCourse(id){
+    let oldCourses = JSON.parse(localStorage.getItem('lectures'));
+    for (let index = 0; index < oldCourses.length; index++) {
+        const course = oldCourses[index];
+        if (Number(course.id) == Number(id)){
+            oldCourses.splice(index, 1); // Remove the element 
+
+            // Update localStorage
+            localStorage.setItem('lectures', JSON.stringify(oldCourses)); // Update the oldCourses
+        }
+    }
+}
+
+// Displays the edit course modal view
+function showCourseModal(course, modal){
+    modal.innerHTML = '';
+    modal.innerHTML = `
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <h4>Edit Course</h4>
+        <div class="input-field">
+            <label for="editName">Course Name:</label>
+            <input type="text" id="editCourseName">
+        </div>
+        <div class="input-field">
+            <label for="editMidterm">Midterm Rate:</label>
+            <input type="number" id="editMidterm">
+        </div>
+        <div class="input-field">
+            <label for="editFinal">Final Rate:</label>
+            <input type="number" id="editFinal">
+        </div>
+        <button id="saveCourseChanges" class="btn">Save</button>
+    </div>
+    ` 
+    // Capture modal elements
+    const courseNameInput = document.getElementById('editCourseName');
+    const midtermInput = document.getElementById('editMidterm');
+    const finalInput = document.getElementById('editFinal');
+    const saveButton = document.getElementById('saveCourseChanges');
+
+    // Populate values
+    courseNameInput.value = course.name;
+    midtermInput.value = course.midterm;
+    finalInput.value = course.final;
+
+    // Show the modal
+    modal.style.display = 'block';
+
+   
+
+    // Add event listener to save button
+    saveButton.onclick = function() {
+         // Load existing courses
+        let courses = JSON.parse(localStorage.getItem('lectures'));
+
+        // Implement save functionality
+        console.log('Save changes for course :', course.name);
+         
+        // Hide the modal after saving
+        modal.style.display = 'none';
+         
+        // Update Course data or refresh list here
+        const updatedCourse = {
+            id: Number(course.id),
+            name: document.getElementById('editCourseName').value,
+            midterm: Number(document.getElementById('editMidterm').value),
+            final: Number(document.getElementById('editFinal').value),
+            students: course.students
+        };
+        updateCourse(courses, updatedCourse);
+        let updatedCourses = JSON.parse(localStorage.getItem('lectures'));
+        let courseListDiv = document.getElementById('course-list');
+        courseListDiv.style.display = 'none';
+        displayCoursesTable(updatedCourses, courseListDiv);
+    };
+ 
+    // Added another event listener for close button
+    const closeButton = document.querySelector('.close');
+    closeButton.onclick = function() {
+        modal.style.display = 'none';
+    };
+}
+
+// Updates the given course and saves localStorage
+function updateCourse(courses, updatedCourse){
+    for (let i = 0; i < courses.length; i++) {
+        if (Number(courses[i].id) === Number(updatedCourse.id)){
+            courses[i] = updatedCourse;
+            console.log("Update course operation finished");
+            console.log(courses);
+            break;
+        } 
+    }
+    // Update localStorage
+    localStorage.setItem('lectures', JSON.stringify(courses));
 }
 
 
@@ -156,9 +329,6 @@ function addStudentToCourse(course, div){
     // Set an Event Listener for the Add Student to Course form
     const studentToCourseForm = document.getElementById('add-student-to-course-form');
 
-    // Load existing courses or initialize an empty list
-    let courses = JSON.parse(localStorage.getItem('lectures')) || [];
-
     studentToCourseForm.addEventListener('submit', function(event) {
         event.preventDefault();
 
@@ -184,8 +354,16 @@ function addStudentToCourse(course, div){
         }
 
         // Update the courses data
-        courses.course = course;
-        localStorage.setItem('lectures', JSON.stringify(courses));
+        // Update localStorage
+        let oldCourses = JSON.parse(localStorage.getItem('lectures'));
+        for (let k = 0; k < oldCourses.length; k++) {
+            if (Number(oldCourses[k].id) === Number(course.id)){
+                oldCourses[k] = course; 
+                localStorage.setItem('lectures', JSON.stringify(oldCourses)); // Update the oldCourses
+                break;
+            }
+        }
+
         let studentListDiv = document.getElementById('student-list')
         if (!studentListDiv){
             // Create and prepare students list div
@@ -195,7 +373,6 @@ function addStudentToCourse(course, div){
             mainContent.appendChild(studentListDiv);
         }
         studentListDiv.style.display = 'none';
-        console.log("tesing");
         displayStudentsTable(course); // Display the current courses from JSON file which loaded to localStorage
         studentToCourseForm.reset();
     });
@@ -256,6 +433,8 @@ function showCourseDetails(course){
 
     // Event listener for 'Show Students' button
     showStudentsButton.addEventListener('click', function() {
+        var studentsListDiv = document.getElementById('student-list');
+        studentsListDiv.innerHTML = '';
         displayStudentsTable(course);
     });
 
@@ -273,8 +452,7 @@ function displayStudentsTable(course){
         showStudentsButton.textContent = 'Show Students';
     }
     studentsListDiv.innerHTML = '';
-    console.log("in display");
-    console.log(course);
+
     // Create table for students list
     let studentsHtml = '<h2>Students:</h2><table>';
     studentsHtml += '<tr><th>ID</th><th>Name</th><th>Surname</th><th>Midterm</th><th>Final</th><th>Letter</th><th>Actions</th></tr>';
@@ -302,7 +480,6 @@ function displayStudentsTable(course){
     }
 
     // Create modal div for edit/remove buttons
-    console.log(document.getElementsByClassName('modal')[0]);
     if (!document.getElementsByClassName('modal')[0]){
         modal = document.createElement('div');
         modal.className = 'modal';
@@ -366,12 +543,17 @@ function showRemoveStudentModal(student, modal, course) {
     // Add event listener to remove button
     removeButton.addEventListener('click', function (){
         console.log('Removing the student from the selected course. Student ID:', student.id);
-        removeStudentFromCourse(student, course);
-        // Update the table
+        updatedCourse = removeStudentFromCourse(student, course);
+
+        // Get the updated data from localStorage 
         upatedCourses = JSON.parse(localStorage.getItem('lectures'));
-        course = getCourseById(upatedCourses, course.id);
-        console.log(course.students);
-        displayStudentsTable(course)
+        
+        // Clear table
+        studentListTable = document.getElementById('student-list');
+        studentListTable.innerHTML = '';
+
+        // Show updated table
+        displayStudentsTable(course);
 
         // Hide the modal after saving
         modal.style.display = 'none';
@@ -395,28 +577,24 @@ function getCourseById(courses, courseId){
 
 // Removes the given student from the given course
 function removeStudentFromCourse(student, course){
-    let courses = JSON.parse(localStorage.getItem('lectures'));
-    let courseId = Number(course.id);
-    let studentId = Number(student.id);
+    for (let i = 0; i < course.students.length; i++) {
+        if (Number(course.students[i].id) == Number(student.id)){
+            course.students.splice(i,1); //Remove the target student from array
+            console.log("Remove operation finished");
+            console.log(course.students);
 
-    for (let i = 0; i < courses.length; i++){
-        if (courses[i].id === courseId){
-            let targetCourse = courses[i];
-            for(let j = 0; j < targetCourse.students.length; j++){
-                if (targetCourse.students[j].id === studentId){
-                    targetCourse.students.splice(j,1) //Remove the target student from array
-
-                    // Update localStorage
-                    localStorage.setItem('lectures', JSON.stringify(courses));
-                    return
-
+            // Update localStorage
+            let oldCourses = JSON.parse(localStorage.getItem('lectures'));
+            for (let k = 0; k < oldCourses.length; k++) {
+                if (Number(oldCourses[k].id) === Number(course.id)){
+                    oldCourses[k] = course; 
+                    localStorage.setItem('lectures', JSON.stringify(oldCourses)); // Update the oldCourses
+                    break;
                 }
             }
+            return course;
         }
-    }
-
-    
-    
+    } 
 }
 
 // Shows a pop-up for edit student modal view
@@ -491,7 +669,6 @@ function showStudentModal(student, modal){
     closeButton.onclick = function() {
         modal.style.display = 'none';
     };
-
 }
 
 // Returns the student object of course item for the given student ID
